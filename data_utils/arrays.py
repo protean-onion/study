@@ -2,7 +2,6 @@ from time import time
 from random import randint
 
 def incremental_random_arrays(value_range, size, n):
-    
     pass
 
 def random_array_batches(value_range = 100, size = 100, n = 100):

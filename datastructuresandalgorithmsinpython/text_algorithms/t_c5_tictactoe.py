@@ -58,6 +58,7 @@ class TicTacToe:
                 if entry == " ":
                     return False
         
+        print("Game over. It's a tie.")
         return True
     
     def player_switch(self):

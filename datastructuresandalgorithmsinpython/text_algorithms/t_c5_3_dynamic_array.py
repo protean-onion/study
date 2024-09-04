@@ -17,10 +17,12 @@ class DynamicArray:
 
     def __getitem__(self, k):
         """Return element at index k."""
-        if not 0 <= k < self._n:
+        if not self._n * -1 <= k < self._n:
             raise IndexError('invalid index')
-            raise IndexError('invalid index')
-        return self._A[k]                    # retrieve from array
+        if k < 0:
+            return self._A[self._n + k]
+        else:
+            return self._A[k]                    # retrieve from array
 
     def append(self, obj):
         """Add object to end of the array."""
@@ -69,13 +71,18 @@ class DynamicArray:
         for i in range(begin, self._n, step):
             self._A[i] = element
 
-    def their_insert(self, k, value):
+    def insert(self, k, value):
         """Insert value at index k, shifting subsequent values rightward."""
         # (for simplicity, we assume 0 <= k <= n in this verion)
         if self._n == self._capacity:            # not enough room
+            final = self._A[self._n - 1]
+            for j in range(self._n - 1, k, -1):
+                self._A[j] = self._A[j - 1]
             self._resize(2 * self._capacity)     # so double capacity
-        for j in range(self._n, k, -1):          # shift rightmost first
-            self._A[j] = self._A[j-1]
+            self._A[self._n] = final
+        else:
+            for j in range(self._n, k, -1):
+                self._A[j] = self._A[j - 1]
         self._A[k] = value                       # store newest element
         self._n += 1
 
